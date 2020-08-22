@@ -1,5 +1,3 @@
-
-
 CONFIG += c++17 console
 #CONFIG -= app_bundle
 
@@ -22,7 +20,7 @@ SOURCES += \
         personnage.cpp \
         source.cpp
 
-
+TARGET=Naruto Pixel Burst
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -95,12 +93,37 @@ LIBS += -lsfml-system-s-d       #SFML Static Module
 LIBS += -lwinmm            #Dependency
 }
 
-RESOURCES += \
-    rsc.qrc
+RESOURCES +=
 
 HEADERS += \
     AnimatedSprite.h \
     animation.h \
     personnage.h \
     source.h
+
+#DISTFILES += \
+#    assets/code/CODE Bold.otf \
+#    assets/code/CODE Light.otf \
+#    assets/code/nasalization/nasalization-rg.ttf \
+#    assets/code/nasalization/read-this.html \
+#    assets/code/nasalization/typodermic-eula-02-2014.pdf \
+#    assets/code/roboto/NOTICE.txt \
+#    assets/code/roboto/Roboto-Black.ttf \
+#    assets/code/roboto/Roboto-BlackItalic.ttf \
+#    assets/code/roboto/Roboto-Bold.ttf \
+#    assets/code/roboto/Roboto-BoldCondensed.ttf \
+#    assets/code/roboto/Roboto-BoldCondensedItalic.ttf \
+#    assets/code/roboto/Roboto-BoldItalic.ttf \
+#    assets/code/roboto/Roboto-Condensed.ttf \
+#    assets/code/roboto/Roboto-CondensedItalic.ttf \
+#    assets/code/roboto/Roboto-Italic.ttf \
+#    assets/code/roboto/Roboto-Light.ttf \
+#    assets/code/roboto/Roboto-LightItalic.ttf \
+#    assets/code/roboto/Roboto-Medium.ttf \
+#    assets/code/roboto/Roboto-MediumItalic.ttf \
+#    assets/code/roboto/Roboto-Regular.ttf \
+#    assets/code/roboto/Roboto-Thin.ttf \
+#    assets/code/roboto/Roboto-ThinItalic.ttf \
+#    assets/code/roboto/Roboto_Specimen_Book.pdf \
+#    assets/musics/The_Offspring_All_I_Want_8_bit.flac
 

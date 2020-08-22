@@ -18,21 +18,8 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
                          unsigned char limit_break)
 {
     Personnage::sprite_perso= sprite_perso;
-
-    sf::Image img;
-    img.loadFromFile("D:\\Sprites\\hokage_minato_namikaze.png");
-    for (unsigned int a=0; a<img.getSize().x; a++)
-    {
-        for (unsigned int b=0; b<img.getSize().y; b++)
-        {
-                if (img.getPixel(a,b) == sf::Color(0,128,0)){
-                    img.setPixel(a,b, sf::Color::Transparent);
-                    //std::cout<<"pixel identifié";
-                }
-        }
-    }
-    perso->loadFromImage(img);
     Personnage::perso= perso;
+    perso->setSmooth(true);
     Personnage::width= width;
     Personnage::height= height;
 
@@ -57,7 +44,21 @@ Personnage::~Personnage(){
 }
 
 bool Personnage::loadFromFile(std::string filename, sf::Color color_to_clear){
-
+    sf::Image img;
+    if(!img.loadFromFile("D:\\Sprites\\hokage_minato_namikaze.png"))
+        return false;
+    for (unsigned int a=0; a<img.getSize().x; a++)
+    {
+        for (unsigned int b=0; b<img.getSize().y; b++)
+        {
+                if (img.getPixel(a,b) == color_to_clear){
+                    img.setPixel(a,b, sf::Color::Transparent);
+                    //std::cout<<"pixel identifié";
+                }
+        }
+    }
+    perso->loadFromImage(img);
+    sprite_perso->setTexture(*perso);
 }
 
 unsigned int Personnage::get_pv(void){
@@ -84,7 +85,7 @@ void Personnage::operator++(void){
     if(xpos >= animation_geometry[Dir][1])
         xpos=animation_geometry[Dir][0];
     sprite_perso->setTextureRect(sf::IntRect(xpos,animation_geometry[Dir][2],width,height));
-    std::cout<<"setTextureRect"<<std::endl;
+    //std::cout<<"setTextureRect"<<std::endl;
 }
 
 bool Personnage::animeperso(sf::Keyboard::Key code){
