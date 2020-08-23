@@ -50,34 +50,34 @@ Settings::Settings()
     if(!settings.value("customized",false).toBool()){
         joy_cmd={
 
-            {joyHorizontal,sf::Joystick::X},
-            {joyVertical,sf::Joystick::Y},
-            {joyDash,6},
+//            {sf::Joystick::X,joyHorizontal},
+//            {sf::Joystick::Y,joyVertical},
+            {6,joyDash},
 
-            {joySquare,0},
-            {joyTriangle,1},
-            {joyCircle,2},
+            {0,joySquare},
+            {1,joyTriangle},
+            {2,joyCircle},
 
-            {joyJutsu,3},
-            {joyThrow,4},
-            {joyTeleport,5}
+            {3,joyJutsu},
+            {4,joyThrow},
+            {5,joyTeleport}
         };
         settings.setValue("customized",false);
     }
     else{
 
         joy_cmd={
-            {joyHorizontal, settings.value("Horizontal",sf::Joystick::X).toInt()},
-            {joyVertical, settings.value("Vertical",sf::Joystick::Y).toInt()},
-            {joyDash, settings.value("joyDash",6).toInt()},
+//            {settings.value("Horizontal",sf::Joystick::X).toInt(), joyHorizontal},
+//            {settings.value("Vertical",sf::Joystick::Y).toInt(), joyVertical},
+            {settings.value("joyDash",6).toInt(), joyDash},
 
-            {joySquare, settings.value("joySquare",0).toInt()},
-            {joyTriangle, settings.value("joyTriangle",1).toInt()},
-            {joyCircle, settings.value("joyCircle",2).toInt()},
+            {settings.value("joySquare",0).toInt(), joySquare},
+            {settings.value("joyTriangle",1).toInt(), joyTriangle},
+            {settings.value("joyCircle",2).toInt(), joyCircle},
 
-            {joyJutsu, settings.value("joyJutsu",3).toInt()},
-            {joyThrow, settings.value("joyThrow",4).toInt()},
-            {joyTeleport, settings.value("joyTeleport",5).toInt()}
+            {settings.value("joyJutsu",3).toInt(), joyJutsu},
+            {settings.value("joyThrow",4).toInt(), joyThrow},
+            {settings.value("joyTeleport",5).toInt(), joyTeleport},
         };
     }
 
@@ -89,22 +89,13 @@ Settings::~Settings(){
 
 }
 
-void* Settings::operator[](unsigned int i) {
-    switch(i){
-        case 0:
-            return &key_cmd;
-        case 1:
-            return &joy_cmd;
-        default:
-            return nullptr;
-    }
-}
-
 keyboard_command Settings::kb_action(sf::Keyboard::Key k){
-    std::cout<<"key_cmd : "<<this[0][1]<<" / real val"<<key_cmd[k];
+
     return key_cmd[k];
 };
 
-int Settings::joy_action(joystick_command cmd){
-    return joy_cmd[cmd];
+joystick_command Settings::joy_action(unsigned int button){
+    return joy_cmd[button];
 }
+
+

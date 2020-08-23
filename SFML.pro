@@ -16,6 +16,7 @@ DEFINES += SFML_STATIC
 SOURCES += \
         AnimatedSprite.cpp \
         animation.cpp \
+        globales.cpp \
         main.cpp \
         personnage.cpp \
         settings.cpp

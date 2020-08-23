@@ -23,8 +23,8 @@ enum keyboard_command{
 
 enum joystick_command{
 
-    joyHorizontal=sf::Joystick::X,//=71
-    joyVertical=sf::Joystick::Y,
+//    joyHorizontal=sf::Joystick::X,//=71
+//    joyVertical=sf::Joystick::Y,
     joyDash=6,
 
     joySquare=0,
@@ -37,27 +37,28 @@ enum joystick_command{
 };
 
 //enum Dir_perso{Dir_Up=585,Dir_Down=480,Dir_Left=585,Dir_Right=585};
-enum Dir_perso{Dir_Up=0,Dir_Down,Dir_Left,Dir_Right};
+enum Dir_perso{
+               Dir_Up=0,
+               Dir_Down,
+               Dir_Left,
+               Dir_Right
+              };
 
-union all_cmd{
-    std::map<int ,keyboard_command> keyboard;
-    std::map<int,joystick_command> joystick;
-};
 
 class Settings
 {
 public:
     Settings();
     ~Settings();
-     void* operator[](unsigned i);
+
      keyboard_command kb_action(sf::Keyboard::Key k);
-     int joy_action(joystick_command cmd);
+     joystick_command joy_action(unsigned int button);
 private:
     QSettings settings;
     int volume;
     //std::map<sf::Keyboard::Key ,keyboard_command> key_cmd;
     std::map<int ,keyboard_command> key_cmd;
-    std::map<joystick_command,unsigned int> joy_cmd;
+    std::map<unsigned int,joystick_command> joy_cmd;
 };
 
 #endif // SETTINGS_H

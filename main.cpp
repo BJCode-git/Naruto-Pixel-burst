@@ -17,11 +17,19 @@ int main(int argv, char **argc)
     float fpsCount=0,switchFPS=50,fpsSpeed=500;
 
     window.create(sf::VideoMode(800, 600), "Naruto Pixel Burst", sf::Style::Default);
-    /*
+
+    if(sf::Joystick::isConnected(0)){
+        sf::Joystick::Identification id=sf::Joystick::getIdentification(0);
+        std::cout<<"Device name : "<<id.name.toAnsiString()<<std::endl;
+        std::cout<<"Product Id : "<<id.productId<<std::endl;
+        std::cout<<"Vendor Id : "<<id.vendorId<<std::endl;
+    }
+
+
     sf::Image icon;
-    if(icon.loadFromFile("naruto32px.ico"))
+    if(icon.loadFromFile(PREFIX"naruto48px.png"))
         window.setIcon(48,48,icon.getPixelsPtr());
-    */
+
     std::map<Dir_perso,Tuple> map;
 
     map = { {Dir_Up,{10,335,590,18}},
@@ -49,7 +57,7 @@ int main(int argv, char **argc)
     else{
         music.play();
         music.setLoop(true);
-        music.setVolume(30);
+        music.setVolume(10);
     }
 
     window.setVerticalSyncEnabled(true);
@@ -72,7 +80,10 @@ int main(int argv, char **argc)
                 break;
 
                 case sf::Event::JoystickButtonPressed:
-
+                    Minato.animeperso(true,event.joystickButton.button);
+                break;
+                case sf::Event::JoystickMoved:
+                    Minato.animeperso(false,0,event.joystickMove.position,event.joystickMove.axis);
                 break;
                 /*
                 case sf::Event::MouseButtonPressed:

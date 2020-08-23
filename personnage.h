@@ -17,6 +17,7 @@ struct Tuple
     }
 };
 
+
 class Personnage //Classe qu'ont peut mettre Abstraite
 {
 public:
@@ -42,7 +43,7 @@ public:
 
     void operator++(void);
     virtual bool animeperso(sf::Keyboard::Key code); // méthode qu'ont peut mettre abstraite pure
-    virtual bool animeperso(unsigned int button,bool button_pressed);
+    virtual bool animeperso(bool button_pressed,unsigned int button=0,float joystick_position=0, sf::Joystick::Axis axe=sf::Joystick::Axis::X );
     virtual void attack(Personnage &target);
 
 protected:
@@ -60,6 +61,7 @@ protected:
     unsigned char strength, magic, defense, magical_defense, speed, limit_break;
 
     bool invulnerability;
+    //Settings settings;
 };
 
 #endif // PERSONNAGE_H
