@@ -1,9 +1,5 @@
 #include "personnage.h"
 
-Personnage::Personnage(){
-
-}
-
 Personnage::Personnage(  sf::Sprite *sprite_perso,
                          sf::Texture *perso,
                          int width,
@@ -39,13 +35,13 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
 }
 
 Personnage::~Personnage(){
-    delete sprite_perso;
-    delete perso;
+//    delete sprite_perso;
+//    delete perso;
 }
 
 bool Personnage::loadFromFile(std::string filename, sf::Color color_to_clear){
     sf::Image img;
-    if(!img.loadFromFile("D:\\Sprites\\hokage_minato_namikaze.png"))
+    if(!img.loadFromFile(filename))
         return false;
     for (unsigned int a=0; a<img.getSize().x; a++)
     {
@@ -90,7 +86,15 @@ void Personnage::operator++(void){
 
 bool Personnage::animeperso(sf::Keyboard::Key code){
     Dir_perso old_dir=Dir;
-    switch(code){
+    std::map<sf::Keyboard::Key ,keyboard_command> cmd={
+        {sf::Keyboard::Left, moveLeft},
+        {sf::Keyboard::Right, moveRight},
+        {sf::Keyboard::Up, Jump},
+        {sf::Keyboard::Down, Crounch}
+    };
+
+    keyboard_command temp = cmd[code];
+    switch(temp){
         case moveLeft:
             Dir=Dir_Left;//Left;
             sprite_perso->move(-speed*3,0);

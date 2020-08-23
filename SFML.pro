@@ -18,9 +18,11 @@ SOURCES += \
         animation.cpp \
         main.cpp \
         personnage.cpp \
-        source.cpp
+        settings.cpp
 
-TARGET=Naruto Pixel Burst
+#TARGET=Naruto Pixel Burst
+
+#DESTDIR = $$PWD
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -99,7 +101,9 @@ HEADERS += \
     AnimatedSprite.h \
     animation.h \
     personnage.h \
-    source.h
+    settings.h
+
+RC_ICONS = naruto-sign-32.ico
 
 #DISTFILES += \
 #    assets/code/CODE Bold.otf \

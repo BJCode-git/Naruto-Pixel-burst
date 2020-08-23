@@ -1,11 +1,7 @@
 #define PREFIX "../SFML/"
-#include <SFML/Graphics.hpp>
+#include "personnage.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
-
-
-//#include "source.h"
-#include "personnage.h"
 
 
 int main(int argv, char **argc)
@@ -21,7 +17,11 @@ int main(int argv, char **argc)
     float fpsCount=0,switchFPS=50,fpsSpeed=500;
 
     window.create(sf::VideoMode(800, 600), "Naruto Pixel Burst", sf::Style::Default);
-
+    /*
+    sf::Image icon;
+    if(icon.loadFromFile("naruto32px.ico"))
+        window.setIcon(48,48,icon.getPixelsPtr());
+    */
     std::map<Dir_perso,Tuple> map;
 
     map = { {Dir_Up,{10,335,590,18}},
@@ -31,7 +31,7 @@ int main(int argv, char **argc)
           };
 
     Minato.set_animation_geometry(map);
-    Minato.loadFromFile("assets/sprites/hokage_minato_namikaze.png", sf::Color(0,128,0));
+    Minato.loadFromFile(PREFIX"assets/sprites/hokage_minato_namikaze.png", sf::Color(0,128,0));
 
     sf::Image background;
     sf::Texture texture_bg;
@@ -49,6 +49,7 @@ int main(int argv, char **argc)
     else{
         music.play();
         music.setLoop(true);
+        music.setVolume(30);
     }
 
     window.setVerticalSyncEnabled(true);
@@ -68,6 +69,10 @@ int main(int argv, char **argc)
 
                 case sf::Event::KeyPressed:
                     dir_changed=Minato.animeperso(event.key.code);
+                break;
+
+                case sf::Event::JoystickButtonPressed:
+
                 break;
                 /*
                 case sf::Event::MouseButtonPressed:

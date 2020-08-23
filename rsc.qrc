@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/rsc">
-        <file alias="test">assets/musics/The_Offspring_All_I_Want_8_bit.flac</file>
-
-    </qresource>
-</RCC>
