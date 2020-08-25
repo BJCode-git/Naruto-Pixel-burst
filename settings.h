@@ -38,10 +38,19 @@ enum joystick_command{
 
 //enum Dir_perso{Dir_Up=585,Dir_Down=480,Dir_Left=585,Dir_Right=585};
 enum Dir_perso{
-               Dir_Up=0,
-               Dir_Down,
-               Dir_Left,
-               Dir_Right
+                Dir_Up=0,
+                Dir_Down,
+                Dir_Left,
+                Dir_Right,
+                Dir_Stance,
+
+                Dir_Square,
+                Dir_Triangle,
+                Dir_Circle,
+
+                Dir_Jutsu,
+                Dir_Throw,
+                Dir_Teleport
               };
 
 
@@ -54,7 +63,7 @@ public:
      keyboard_command kb_action(sf::Keyboard::Key k);
      joystick_command joy_action(unsigned int button);
 private:
-    QSettings settings;
+    QSettings parametres;
     int volume;
     //std::map<sf::Keyboard::Key ,keyboard_command> key_cmd;
     std::map<int ,keyboard_command> key_cmd;

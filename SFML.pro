@@ -1,4 +1,4 @@
-CONFIG += c++17 console
+CONFIG += c++11 console
 #CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
@@ -16,6 +16,7 @@ DEFINES += SFML_STATIC
 SOURCES += \
         AnimatedSprite.cpp \
         animation.cpp \
+        frameanimation.cpp \
         globales.cpp \
         main.cpp \
         personnage.cpp \
@@ -101,6 +102,7 @@ RESOURCES +=
 HEADERS += \
     AnimatedSprite.h \
     animation.h \
+    frameanimation.h \
     personnage.h \
     settings.h
 
