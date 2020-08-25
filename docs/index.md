@@ -1,37 +1,30 @@
-## Welcome to GitHub Pages
+# Welcome to Naruto-Pixel-Burst project !
 
-You can use the [editor on GitHub](https://github.com/BJCode-git/Naruto-Pixel-burst/edit/gh-pages/docs/index.md) to maintain and preview the content for your website in Markdown files.
+This is project is building currently with [SFML](https://www.sfml-dev.org). I planned to use [Qt5](https://www.qt.io/) for the main menu and SFML windows only for the fights.
+This is my first 2D game using SFML. As I'm currently a student, I could probably work on the project only during holydays.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# The game
 
-### Markdown
+It's a little 2D naruto fight game, but I would probably add characters from other anime like Goku, Gon, Ichigo ... 
+You could use some jutsu, combo and so on, like a normal old fashion fight game !
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Participate 
 
-```markdown
-Syntax highlighted code block
+Feel free to participate to the project if it seems interesting to you.
+You can also give advice or critics everything to help me improve the code and so my coding skills.
 
-# Header 1
-## Header 2
-### Header 3
+```cpp
+#include <iostream>
+using namespace std;
+int main(int argc, char **argv){
+  string visitor= "you";
+  bool u_r_awesome=true;
+  
+  if(u_r_awesome)
+    cout<<"Thanks you fellow, you are awesome !"
+  else
+    return EXIT_FAILURE;
+  return EXIT_SUCCESS;
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+}
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/BJCode-git/Naruto-Pixel-burst/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
