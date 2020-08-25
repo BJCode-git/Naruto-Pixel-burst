@@ -21,7 +21,7 @@ int main(int argc, char **argv){
   bool u_r_awesome=true;
   
   if(u_r_awesome)
-    cout<<"Thanks you fellow, you are awesome !"
+    cout<<"Thank you fellow, you are awesome !"
   else
     return EXIT_FAILURE;
   return EXIT_SUCCESS;
