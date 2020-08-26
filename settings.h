@@ -40,8 +40,7 @@ enum joystick_command{
 enum Dir_perso{
                 Dir_Up=0,
                 Dir_Down,
-                Dir_Left,
-                Dir_Right,
+                Dir_X,
                 Dir_Stance,
 
                 Dir_Square,

@@ -2,8 +2,17 @@
 
 extern Settings settings;
 
-Personnage::Personnage(  sf::Sprite *sprite_perso,
-                         sf::Texture *perso,
+void operator--(Orientation &o){
+    if(o==Gauche)
+        o=Droite;
+    else
+        o=Gauche;
+}
+
+Personnage::Personnage(  sf::Window *parent_window,
+                         std::string texture_file_name,
+                         sf::Color color_to_clear
+                       )/*
                          unsigned int pv,
                          unsigned int chakra,
                          unsigned char strength,
@@ -11,12 +20,17 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
                          unsigned char defense,
                          unsigned char magical_defense,
                          unsigned char speed,
-                         unsigned char limit_break)
+                         unsigned char limit_break)*/
 {
-    Personnage::sprite_perso= sprite_perso;
-    Personnage::perso= perso;
+    parent=parent_window;
+    std::cout<<"size x : "<<parent->getSize().x<<"// size y : "<<parent->getSize().y<<std::endl;
+    sprite_perso= new sf::Sprite();
+    perso= new sf::Texture();
+    loadFromFile( texture_file_name,color_to_clear);
+
     perso->setSmooth(true);
 
+    /*
     Personnage::pv=pv;
     Personnage::chakra=chakra;
     Personnage::strength=strength;
@@ -25,11 +39,24 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
     Personnage::magical_defense=magical_defense;
     Personnage::speed=speed;
     Personnage::limit_break=limit_break;
+    */
+
+    pv=10000;
+    chakra=1000;
+    strength=1;
+    magic=1;
+    defense=1;
+    magical_defense=1;
+    speed=1;
+    limit_break=100;
 
     invulnerability=false;
 
     Dir=Dir_Stance;//Dir_Right;
+    oriente=Droite;
+
     interrupt=false;
+    /*
     FrameAnimation moveX{{
                               sf::IntRect( 405, 596, 45, 57),
                               sf::IntRect( 460, 596, 53, 59),
@@ -83,7 +110,7 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
     FrameAnimation Stance
     {{
      sf::IntRect( 9, 485, 32, 70),
-     sf::IntRect( 48, 485, 32, 70),
+     sf::IntRect( 46, 485, 32, 70),
      sf::IntRect( 84, 485, 32, 70),
      sf::IntRect( 126, 485, 32, 70),
    }};
@@ -96,12 +123,12 @@ Personnage::Personnage(  sf::Sprite *sprite_perso,
      sf::IntRect( 317, 484, 32, 70)
     }};
     list_animations.insert(std::pair<Dir_perso,FrameAnimation>(Dir_Down,Teleport));
-    std::cout<<"Perso construit";
+    */
 }
 
 Personnage::~Personnage(){
-//    delete sprite_perso;
-//    delete perso;
+    delete sprite_perso;
+    delete perso;
 }
 
 bool Personnage::loadFromFile(std::string filename, sf::Color color_to_clear){
@@ -120,6 +147,7 @@ bool Personnage::loadFromFile(std::string filename, sf::Color color_to_clear){
     }
     perso->loadFromImage(img);
     sprite_perso->setTexture(*perso);
+    return true;
 }
 
 unsigned int Personnage::get_pv(void){
@@ -129,6 +157,10 @@ unsigned int Personnage::get_chakra(void){
     return chakra;
 }
 
+sf::Sprite* Personnage::get_sprite(){
+    return sprite_perso;
+};
+
 void Personnage::set_pv(unsigned int pv){
     Personnage::pv=pv;
 }
@@ -136,15 +168,15 @@ void Personnage::set_chakra(unsigned int chakra){
     Personnage::chakra=chakra;
 }
 
-
-
 sf::Time Personnage::operator++(void){
-    sf::Time time=list_animations[Dir].time();
-    sprite_perso->setTextureRect(list_animations[Dir].next());
-    if(list_animations[Dir].is_end())
-         Dir=Dir_Stance;
-
+    if(list_animations.count(Dir)>0){
+        sf::Time time=list_animations[Dir].time();
+        sprite_perso->setTextureRect(list_animations[Dir].next());
+        if(list_animations[Dir].is_end())
+             Dir=Dir_Stance;
     return time;
+    }
+    return sf::seconds(0);
 }
 
 void Personnage::attack(Personnage &target){
@@ -157,11 +189,15 @@ bool Personnage:: animeperso_on_Event(sf::Keyboard::Key code){
     keyboard_command temp = settings.kb_action(code); //cmd[code];
     switch(temp){
         case moveLeft:
-            Dir=Dir_Left;//Left;
+            Dir=Dir_X;//Left;
+            oriente=Gauche;
+            sprite_perso->setScale(oriente, 1);
             sprite_perso->move(-speed*5,0);
         break;
         case moveRight:
-            Dir=Dir_Right;
+            Dir=Dir_X;
+            oriente=Droite;
+            sprite_perso->setScale(oriente, 1);
             sprite_perso->move(speed*5,0);
         break;
         case Jump:
@@ -170,7 +206,7 @@ bool Personnage:: animeperso_on_Event(sf::Keyboard::Key code){
         break;
         case Crounch:
             Dir=Dir_Down;
-            sprite_perso->move(-speed*50,0);
+            sprite_perso->move(-oriente*speed*50,0);
         break;
         case Jutsu:
             Dir=Dir_Jutsu;
@@ -179,10 +215,20 @@ bool Personnage:: animeperso_on_Event(sf::Keyboard::Key code){
             Dir=Dir_Stance;
     }
     sf::Vector2f position(sprite_perso->getPosition());
+    sf::Vector2f dimensions(parent->getSize());
     if(position.x<0)
         sprite_perso->setPosition(0,position.y);
+    else if(position.x>dimensions.x){
+        sprite_perso->setPosition(0,position.y);
+        std::cout<<"move to : ("<<sprite_perso->getPosition().x<<";"<<sprite_perso->getPosition().y<<")"<<std::endl;
+    }
+
     if(position.y<0)
         sprite_perso->setPosition(position.x,0);
+    else if (position.y>dimensions.y) {
+        sprite_perso->setPosition(position.x,dimensions.y);
+    }
+
     if(old_dir!=Dir)
         return true;
     return false;
@@ -191,7 +237,7 @@ bool Personnage:: animeperso_on_Event(sf::Keyboard::Key code){
 bool Personnage:: animeperso_on_Event(bool button_pressed,unsigned int button,float joystick_position, sf::Joystick::Axis axe){
     Dir_perso old_dir=Dir;
     if (button_pressed){
-         joystick_command temp = settings.joy_action(button_pressed);
+         joystick_command temp = settings.joy_action(button);
          switch(temp){
              case joySquare:
                  Dir=Dir_Jutsu;//Left;
@@ -226,21 +272,21 @@ bool Personnage:: animeperso_on_Event(bool button_pressed,unsigned int button,fl
         switch(axe){
             case sf::Joystick::Axis::X:
                 if (joystick_position<-20.0){
-                    Dir=Dir_Left;//Left;
+                    Dir=Dir_X;//Left;
                     sprite_perso->move(-speed*3,0);
                 }
                 else if(joystick_position>20.0){
-                    Dir=Dir_Right;
+                    Dir=Dir_X;
                     sprite_perso->move(speed*3,0);
                 }
             break;
             case sf::Joystick::PovX:
             if (joystick_position<-20.0){
-                Dir=Dir_Left;//Left;
+                Dir=Dir_X;//Left;
                 sprite_perso->move(-speed*3,0);
             }
             else if(joystick_position>20.0){
-                Dir=Dir_Right;
+                Dir=Dir_X;
                 sprite_perso->move(speed*3,0);
             }
             break;
@@ -268,9 +314,34 @@ bool Personnage:: animeperso_on_Event(bool button_pressed,unsigned int button,fl
                 Dir=Dir_Stance;
         }
     }
+
+    sf::Vector2f position(sprite_perso->getPosition());
+    sf::Vector2f dimensions(parent->getSize());
+    if(position.x<0)
+        sprite_perso->setPosition(0,position.y);
+    else if(position.x>dimensions.x){
+        sprite_perso->setPosition(dimensions.x-50,position.y);
+    }
+
+    if(position.y<0)
+        sprite_perso->setPosition(position.x,0);
+    else if (position.y>dimensions.y) {
+        sprite_perso->setPosition(position.x,dimensions.y);
+    }
+
     if(old_dir!=Dir)
         return true;
     return false;
 }
 
+void Personnage::set_orientation(Orientation o){
+    oriente=o;
+}
+
+void Personnage::set_animations(std::map<Dir_perso,FrameAnimation> animations){
+    list_animations=animations;
+}
+void Personnage::add_animation(Dir_perso anim, FrameAnimation frames){
+    list_animations.insert({anim,frames});
+}
 

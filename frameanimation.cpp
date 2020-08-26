@@ -28,7 +28,6 @@ void FrameAnimation::setFrameList(std::vector<sf::IntRect> list){
 }
 
 sf::IntRect FrameAnimation::next(void){
-
      if(i<frames.size()){
           ++i;
          return frames[i-1];

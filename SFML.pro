@@ -14,17 +14,17 @@ CONFIG += c++11 console
 DEFINES += SFML_STATIC
 
 SOURCES += \
-        AnimatedSprite.cpp \
-        animation.cpp \
+        Collision.cpp \
+        Little_Physics_Engine.cpp \
         frameanimation.cpp \
         globales.cpp \
         main.cpp \
         personnage.cpp \
         settings.cpp
 
-#TARGET=Naruto Pixel Burst
+TARGET=Naruto Pixel Burst
 
-#DESTDIR = $$PWD
+DESTDIR = $$PWD
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -100,8 +100,8 @@ LIBS += -lwinmm            #Dependency
 RESOURCES +=
 
 HEADERS += \
-    AnimatedSprite.h \
-    animation.h \
+    Collision.h \
+    Little_Physics_Engine.h \
     frameanimation.h \
     personnage.h \
     settings.h
