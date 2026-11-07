@@ -1,0 +1,40 @@
+# CI workflow for Naruto Pixel Burst
+# Includes build, test, and linting
+
+name: Build and Test
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsfml-dev meson ninja-build
+        
+    - name: Configure project
+      run: |
+        meson setup build --buildtype=release
+        
+    - name: Build project
+      run: |
+        meson compile -C build
+        
+    - name: Run tests
+      run: |
+        meson test -C build
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Naruto-Pixel-Burst
+        path: build/Naruto-Pixel-Burst
