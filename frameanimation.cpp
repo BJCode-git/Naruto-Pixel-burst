@@ -1,5 +1,4 @@
 #include "frameanimation.h"
-#include <QDebug>
 
 FrameAnimation::FrameAnimation():
     frames()

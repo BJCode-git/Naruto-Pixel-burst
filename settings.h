@@ -1,6 +1,5 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-#include <QSettings>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
