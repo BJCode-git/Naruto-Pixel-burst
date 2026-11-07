@@ -1,6 +1,8 @@
 #include "personnage.h"
+#include "settings.h"
 
-extern Settings settings;
+// Global settings instance
+Settings settings;
 
 void operator--(Orientation &o){
     if(o==Gauche)

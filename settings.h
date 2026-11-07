@@ -1,8 +1,11 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-#include <QSettings>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <map>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 enum keyboard_command{
     moveLeft=sf::Keyboard::Left,//=71
@@ -62,11 +65,12 @@ public:
      keyboard_command kb_action(sf::Keyboard::Key k);
      joystick_command joy_action(unsigned int button);
 private:
-    QSettings parametres;
     int volume;
-    //std::map<sf::Keyboard::Key ,keyboard_command> key_cmd;
     std::map<int ,keyboard_command> key_cmd;
     std::map<unsigned int,joystick_command> joy_cmd;
+    void loadDefaultSettings();
+    void loadFromFile();
+    void saveToFile();
 };
 
 #endif // SETTINGS_H

@@ -26,6 +26,22 @@ enum Orientation{
 
 void operator--(Orientation &o);
 
+// Include the Dir_perso enum definition
+enum Dir_perso{
+                Dir_Up=0,
+                Dir_Down,
+                Dir_X,
+                Dir_Stance,
+
+                Dir_Square,
+                Dir_Triangle,
+                Dir_Circle,
+
+                Dir_Jutsu,
+                Dir_Throw,
+                Dir_Teleport
+              };
+
 class Personnage //Classe qu'ont peut mettre Abstraite
 {
 public:
@@ -40,7 +56,7 @@ public:
                unsigned char defense=1,
                unsigned char magical_defense=1,
                unsigned char speed=1,
-               unsigned char limit_break=100);*/
+               unsigned char limit_break=100;*/
     ~Personnage();
 
     bool loadFromFile(std::string filename, sf::Color color_to_clear);
