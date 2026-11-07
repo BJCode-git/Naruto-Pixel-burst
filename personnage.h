@@ -1,6 +1,5 @@
 #ifndef PERSONNAGE_H
 #define PERSONNAGE_H
-#include <QDebug>
 #include <map>
 #include <iostream>
 #include "settings.h"

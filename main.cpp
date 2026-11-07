@@ -2,7 +2,7 @@
 #include "personnage.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
-#include <QDebug>
+
 
 using namespace sf;
 
