@@ -40,6 +40,10 @@ meson test -C build
 - `frameanimation.h/cpp` - Animation handling system
 - `settings.h/cpp` - Input handling system
 - `Collision.h/cpp` - Collision detection system
+- `character_selection.h/cpp` - Character selection system
+- `arena.h/cpp` - Arena system with parallax backgrounds
+- `particle_system.h/cpp` - Particle effects system
+- `3d_effects.h/cpp` - 3D effects system
 - `assets/` - Directory containing all game assets (sprites, backgrounds, sounds, fonts)
 
 ## Contributing

@@ -20,7 +20,11 @@ sources = [
     'globales.cpp',
     'main.cpp',
     'personnage.cpp',
-    'settings.cpp'
+    'settings.cpp',
+    'character_selection.cpp',
+    'arena.cpp',
+    'particle_system.cpp',
+    '3d_effects.cpp'
 ]
 
 # Define headers
@@ -29,7 +33,11 @@ headers = [
     'Little_Physics_Engine.h',
     'frameanimation.h',
     'personnage.h',
-    'settings.h'
+    'settings.h',
+    'character_selection.h',
+    'arena.h',
+    'particle_system.h',
+    '3d_effects.h'
 ]
 
 # Create executable
@@ -47,6 +55,10 @@ test_exe = executable('tests',
     'test_settings.cpp',
     'test_personnage.cpp',
     'test_physics.cpp',
+    'test_character_selection.cpp',
+    'test_arena.cpp',
+    'test_particle_system.cpp',
+    'test_3d_effects.cpp',
     'catch.hpp',
     dependencies: [sfml, sfml_audio, sfml_window, sfml_system],
     cpp_args: ['-Wall', '-Wextra', '-O2']
@@ -56,3 +68,7 @@ test_exe = executable('tests',
 test('frameanimation', test_exe, args: ['--success'])
 test('settings', test_exe, args: ['--success'])
 test('personnage', test_exe, args: ['--success'])
+test('character_selection', test_exe, args: ['--success'])
+test('arena', test_exe, args: ['--success'])
+test('particle_system', test_exe, args: ['--success'])
+test('3d_effects', test_exe, args: ['--success'])
