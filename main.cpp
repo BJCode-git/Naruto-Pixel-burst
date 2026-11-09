@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 {
     // Gestion fenetre
     for(int i=0;i<argc;i++){
-        std::cout<<"arg "<<i<<" : "<<**argv<<" // ";
+        std::cout<<"arg "<<i<<" : "<<argv[i]<<" // ";
     }
 
     sf::RenderWindow  window;

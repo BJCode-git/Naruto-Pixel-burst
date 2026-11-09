@@ -28,15 +28,17 @@ void FrameAnimation::setFrameList(std::vector<sf::IntRect> list){
 
 sf::IntRect FrameAnimation::next(void){
      if(i<frames.size()){
-          ++i;
-         return frames[i-1];
+         return frames[i++];
      }
-     i=0;
+     if(continue_animation) {
+         i=0;
+         return frames[0];
+     }
      return frames[frames.size()-1];
 }
 
 bool FrameAnimation::is_end(void){
-    if (i==0)
+    if (i>=frames.size())
         return true;
     return false;
 }

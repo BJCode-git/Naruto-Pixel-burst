@@ -28,6 +28,13 @@ Personnage::Personnage(  sf::Window *parent_window,
     perso= new sf::Texture();
     loadFromFile( texture_file_name,color_to_clear);
 
+    if (!perso->loadFromFile("ressources/sprites/" + texture_file_name + ".png"))
+    {
+        // Gérer l'erreur de chargement
+        std::cerr << "Erreur de chargement de la texture : " << texture_file_name << std::endl;
+        return;
+    }
+    sprite_perso->setTexture(*perso);
     perso->setSmooth(true);
 
     /*
@@ -186,7 +193,7 @@ void Personnage::attack(Personnage &target){
 bool Personnage:: animeperso_on_Event(sf::Keyboard::Key code){
     Dir_perso old_dir=Dir;
 
-    keyboard_command temp = settings.kb_action(code); //cmd[code];
+    keyboard_command temp = settings.kb_action(static_cast<int>(code)); //cmd[code];
     switch(temp){
         case moveLeft:
             Dir=Dir_X;//Left;
