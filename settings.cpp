@@ -23,7 +23,7 @@ Settings::Settings():
             {sf::Keyboard::F, Throw},
             {sf::Keyboard::R, Teleport},
         };
-        parametres.setValue("customized",false);
+        parametres.setValue("customized",true);
     }
     else{
 
@@ -62,7 +62,7 @@ Settings::Settings():
             {4,joyThrow},
             {5,joyTeleport}
         };
-        parametres.setValue("customized",false);
+        parametres.setValue("customized",true);
     }
     else{
 
